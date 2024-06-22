@@ -223,7 +223,7 @@ npm install --save @nestjs/jwt
 npm install express-openid-connect
 ```
 
-### para levantar tanto la app, como el sevidor de base de datos desde containers.
+### Para levantar tanto la app, como el sevidor de base de datos desde containers.
 
 ```
 docker-compose up

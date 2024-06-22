@@ -3,6 +3,8 @@
 /node_modules
 /build
 .env.development
+token_Docker_Hub_nest-demo.png
+token-dockerHub
 
 # Logs
 logs

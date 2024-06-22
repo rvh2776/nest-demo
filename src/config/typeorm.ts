@@ -13,7 +13,7 @@ const config = {
   password: process.env.DB_PASSWORD,
   dropSchema: false, //? Limpia todas las tablas de la base de datos.
   autoLoadEntities: true,
-  synchronize: false, //? Se debe desactivar para produccion.
+  synchronize: true, //? Se debe desactivar para produccion.
   // logging: true,
   logging: ['error'],
   entities: ['dist/**/*.entity{.ts,.js}'],

@@ -3,7 +3,7 @@ version: '3.8'
 services:
   nest-app:
     build: ./
-    # image: rvh2776/nest-demo:latest  #* En vez de crear una imagen con (buil: ./) directamtne me bajo la imagen de Docker hub.
+    # image: rvh2776/nest-demo:latest  #* En vez de crear una imagen con (buil: ./) directamente me bajo la imagen de Docker hub.
     # platform: linux/arm64, linux/amd64
     ports:
       - '3001:3001'
@@ -25,3 +25,4 @@ volumes:
 
 
 #? Para levantar el proyecto completo en contenedores: la app + postgresDb ejecutamos: docker compose up
+#* Para verificar siempre si es la ultima imagen docker la que se va a usar: docker compose --pull y despues: docker compose up

@@ -1,9 +1,10 @@
-version: '3.8'
+# version: '3.8'
 
 services:
   nest-app:
-    # build: ./
-    image: rvh2776/nest-demo:latest  #* En vez de crear una imagen con (buil: ./) directamente me bajo la imagen de Docker hub.
+    build: ./
+    # image: rvh2776/nest-demo:latest  #* En vez de crear una imagen con (buil: ./) directamente me bajo la imagen de Docker hub.
+    # image: nest-docker:latest  #* En vez de crear una imagen con (buil: ./) directamente me bajo la imagen de Docker hub.
     ports:
       - '3001:3001'
     env_file:
@@ -18,6 +19,8 @@ services:
     image: postgres
     volumes:
       - postgres-db:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
     env_file:
       - .env.development
     networks:
@@ -25,11 +28,12 @@ services:
 
 volumes:
   postgres-db:
+    external: true #? Le digo a docker que use la red ya existente.
 
 networks:
   red-docker:
-    driver: bridge #! Si no existe la red y la quiero declarar uso todo lo anterior, pero en vez de usar la externa uso: driver: true (descomentar esta y comentar: external)
-    # external: true #? Le digo a docker que use la red ya existente.
+    external: true #? Le digo a docker que use la red ya existente.
+    # driver: bridge #! Si no existe la red y la quiero declarar uso todo lo anterior, pero en vez de usar la externa uso: driver: true (descomentar esta y comentar: external)
 
 
 

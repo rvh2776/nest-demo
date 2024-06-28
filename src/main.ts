@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { loggerGlobal } from './middlewares/logger.middleware';
@@ -5,10 +6,25 @@ import { BadRequestException, ValidationPipe } from '@nestjs/common';
 import { auth } from 'express-openid-connect';
 import { config as auth0Config } from './config/auth0.config';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { exec } from 'child_process';
 // import { AuthGuard } from './guards/auth.guard';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  //? Ejecutar miraciones antes de iniciar el proyecto.
+  await new Promise<void>((resolve, reject) => {
+    exec('./migraciones.sh', (error, stdout, stderr) => {
+      if (error) {
+        console.error(`Error ejecutando entorno:\n${error}`);
+        reject(error);
+        return;
+      }
+      console.log(`\nComprobando migraciones.\n\n${stdout}`);
+      resolve();
+    });
+  });
+
   //* Crea una guardia en general para todas las peticiones a la api.
   // app.useGlobalGuards(new AuthGuard());
   //* Crea un interceptor en general para todas las peticiones.

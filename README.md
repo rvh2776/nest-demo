@@ -229,6 +229,15 @@ npm install express-openid-connect
 docker-compose up
 ```
 
+#### Se agrega al archivo: main.ts la ejecución de un script (migraciones.sh) que ejecuta una migración antes de iniciar el proyecto.
+* La idea es siempre revisar antes de iniciar el proyecto la inegridad de la base de datos.
+* El archivo migraciones.sh que se encuentra en la raiz del proyecto debe tener permisos de ejecución.
+
+```
+chmod +x migraciones.sh
+```
+
+
 
 <br>
 <font color='lime'><p align="right">Rafael V.H.</p></font>

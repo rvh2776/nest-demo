@@ -1,7 +1,11 @@
 FROM node:20
 
-# Instalar postgresql-client para despues, poder verificar si levanta la base de datos para hacer la migracion antes de levantar todo.
-RUN apt-get update && apt-get install -y postgresql-client
+#? Instalar postgresql-client, para poder verificar si levantó la base de datos, para despues ejecutar las migraciones antes de levantar la app.
+# RUN apt-get update && apt-get install -y postgresql-client
+
+#? Instala netcat, para poder verificar si levantó la base de datos, para despues ejecutar las migraciones antes de levantar la app.
+RUN apt-get update && apt-get install -y netcat-traditional docker docker-compose
+
 
 # WORKDIR /app
 WORKDIR /usr/src/app
@@ -14,12 +18,6 @@ COPY . .
 
 RUN npm run build
 
-COPY entrypoint.sh /usr/src/app/entrypoint.sh
-
-RUN chmod +x /usr/src/app/entrypoint.sh
-
 EXPOSE 3001
 
-ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
-
-# CMD [ "npm", "run", "start" ]
+CMD [ "npm", "run", "start" ]

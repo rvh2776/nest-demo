@@ -4,7 +4,6 @@ services:
   nest-app:
     build: ./
     # image: rvh2776/nest-demo:latest  #* En vez de crear una imagen con (buil: ./) directamente me bajo la imagen de Docker hub.
-    # image: nest-docker:latest  #* En vez de crear una imagen con (buil: ./) directamente me bajo la imagen de Docker hub.
     ports:
       - '3001:3001'
     env_file:
@@ -12,7 +11,7 @@ services:
     depends_on:
       - postgres-db
     networks:
-      - red-docker #? Si existe la network para los contenedores la declaro (Si es que quiero que use esta) si no docker crea una automaticamente.
+      - red-docker #? Le digo a la red que se debe conectar la app.
 
 
   postgres-db:
@@ -28,13 +27,11 @@ services:
 
 volumes:
   postgres-db:
-    external: true #? Le digo a docker que use la red ya existente.
+    external: true #? Le digo a docker que use el volumen ya existente.
 
 networks:
   red-docker:
     external: true #? Le digo a docker que use la red ya existente.
-    # driver: bridge #! Si no existe la red y la quiero declarar uso todo lo anterior, pero en vez de usar la externa uso: driver: true (descomentar esta y comentar: external)
-
 
 
 #? Para levantar el proyecto completo en contenedores: la app + postgresDb ejecutamos: docker compose up

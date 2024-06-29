@@ -6,24 +6,24 @@ import { BadRequestException, ValidationPipe } from '@nestjs/common';
 import { auth } from 'express-openid-connect';
 import { config as auth0Config } from './config/auth0.config';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { exec } from 'child_process';
+// import { exec } from 'child_process';
 // import { AuthGuard } from './guards/auth.guard';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   //? Ejecutar miraciones antes de iniciar el proyecto.
-  await new Promise<void>((resolve, reject) => {
-    exec('./migraciones.sh', (error, stdout, stderr) => {
-      if (error) {
-        console.error(`Error ejecutando entorno:\n${error}`);
-        reject(error);
-        return;
-      }
-      console.log(`\nComprobando migraciones.\n\n${stdout}`);
-      resolve();
-    });
-  });
+  // await new Promise<void>((resolve, reject) => {
+  //   exec('./migraciones.sh', (error, stdout, stderr) => {
+  //     if (error) {
+  //       console.error(`Error ejecutando entorno:\n${error}`);
+  //       reject(error);
+  //       return;
+  //     }
+  //     console.log(`\nComprobando migraciones.\n\n${stdout}`);
+  //     resolve();
+  //   });
+  // });
 
   //* Crea una guardia en general para todas las peticiones a la api.
   // app.useGlobalGuards(new AuthGuard());
